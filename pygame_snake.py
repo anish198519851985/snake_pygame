@@ -51,7 +51,6 @@ class snake_game():
     super().__init__()		
 
   def reset_game(self, window, snake, food):
-    print("resetting")
     self.window = window[1]
     self.window_color = pygame.Color(window[0])
 
@@ -74,11 +73,9 @@ class snake_game():
     random_snake = self.random_rect(self.snake.width, self.snake.height) 		
     self.snake.part_position.append(sprite.segment(self.snake.color, random_snake, None))
     self.sprites.add(self.snake.part_position[0])
-    print("create", self.snake.part_position[0].rect)		
     for i in range(1, self.snake.parts):
       self.snake.part_position.append(sprite.segment(self.snake.color, self.snake.part_position[i-1].rect, self.snake.part_position[i-1]))
       self.snake.part_position[i].rect = self.snake.part_position[i-1].rect.move(-self.snake.width, 0)			
-      print("create", self.snake.part_position[i].rect)			
       self.sprites.add(snake.part_position[i])			
 			
   def check_wall(self):
@@ -134,14 +131,11 @@ class snake_game():
       return
     for i in range(0, self.snake.parts):
       self.snake.part_position[i].move(self.snake.width, self.snake.height, current_direction) 
-      print("position moved", self.snake.part_position[i].rect)
-    print(" ")
     if current_direction in self.allowed_direction:
       self.snake.direction = current_direction	
 
   def check_collision_with_self(self):
-    #check collision with itself		
-    return False
+    pass
 
   def check_collision_with_food(self):
     hit = pygame.sprite.spritecollide(self.food_sprite, self.sprites, False)
@@ -192,7 +186,6 @@ class snake_game():
         self.show_message()
       if not pygame.mixer.music.get_busy():
         self.play_music('background')
-      print("---")
       pygame.display.update()
 
 def init_game():

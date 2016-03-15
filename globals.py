@@ -34,7 +34,7 @@ def playmusic():
 
 def set_element_sound(element):
     if element == 'hisss':
-      sound = pygame.mixer.Sound('pickup.wav')
+      sound = pygame.mixer.Sound('sounds/pickup.wav')
       sound.play()
 
     elif element == 'background':

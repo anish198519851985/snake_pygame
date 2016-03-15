@@ -187,14 +187,11 @@ class snake_game():
         self.play_music('background')
       pygame.display.update()
 
-
 def make_snake():
   return snake_shape(1, 5, K_RIGHT, "blue", 10, 10, (0, 0), [])
 
-
 def make_food():
   return food_shape("red", 10, 10, (0, 0))
-
 
 def init_game():
   window=("red", dimensions(size[0], size[1]))

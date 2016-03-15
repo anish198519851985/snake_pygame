@@ -46,13 +46,12 @@ class snake_game():
 
   #make sure to pass some sensible values here as checking is up to you
   def __init__(self, window, snake, food):
-    self.reset_game(window, snake, food)
-    pygame.init()
-    super().__init__()		
-
-  def reset_game(self, window, snake, food):
     self.window = window[1]
     self.window_color = pygame.Color(window[0])
+    self.reset_game(window, snake, food)
+    super().__init__()
+
+  def reset_game(self, window, snake, food):
 
     self.snake = snake
     self.create_snake()
@@ -96,8 +95,8 @@ class snake_game():
       if event.type == KEYDOWN:				
         if event.key == K_r:
           window, snake, food = init_game()
-          self.reset_game(window, snake, food)
-          return event.key					
+          self.reset_game(window, make_snake(), make_food())
+          return event.key
         if event.key == K_q:
           self.terminate()					
         else:
@@ -188,12 +187,22 @@ class snake_game():
         self.play_music('background')
       pygame.display.update()
 
+
+def make_snake():
+  return snake_shape(1, 5, K_RIGHT, "blue", 10, 10, (0, 0), [])
+
+
+def make_food():
+  return food_shape("red", 10, 10, (0, 0))
+
+
 def init_game():
   window=("red", dimensions(size[0], size[1]))
-  snake = snake_shape(1, 5, K_RIGHT, "blue", 10, 10, (0, 0), [])
-  food = food_shape("red", 10, 10, (0, 0))
+  snake = make_snake()
+  food = make_food()
   return (window, snake, food)	
 
+pygame.init()
 size = (400, 400)
 window, snake, food = init_game()
 s = snake_game(window, snake, food)
